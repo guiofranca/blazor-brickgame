@@ -1,0 +1,11 @@
+@inject Services.GameEngine GameEngine
+@inject Models.Board board
+
+<div class="bar" style="@GameEngine.Bar.BarStyle()"></div>
+
+@code {
+    protected override void OnInitialized()
+    {
+        GameEngine.PropertyChanged += (o, e) => StateHasChanged();
+    }
+}

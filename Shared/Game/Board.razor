@@ -1,0 +1,38 @@
+@inject Models.Board board
+@inject Models.Ball ball
+@inject Models.Bar bar
+@inject Services.GameEngine GameEngine
+
+<div class="board" style="@BoardSizeStyle()">
+    <span style="position: absolute; left: 15px">Score: @GameEngine.Score</span>
+    <Ball />
+    <Bar />
+    @foreach(var brick in GameEngine.Bricks) {
+        <Brick brick="@brick" />
+    }
+    @if(GameEngine.GameLost) {
+        <button style="@ButtonStyle()" @onclick="RestartGame">You Lose! (Click to restart)</button>
+    }
+    @if(GameEngine.GameWon) {
+        <button style="@ButtonStyle()" @onclick="RestartGame">You Won! (Click to next level)</button>
+    }
+</div>
+
+@code {
+    public string BoardSizeStyle() {
+        return $"width: {board.Width}px; height:{board.Height}px; z-index: 10;";
+    }
+
+    public string ButtonStyle() {
+        return $"position: absolute; left: 50px; top: {board.Height/2}px; z-index: 10;";
+    }
+
+    protected override void OnInitialized()
+    {
+        GameEngine.PropertyChanged += (o, e) => StateHasChanged();
+    }
+
+    public void RestartGame() {
+        GameEngine.RestartGame();
+    }
+}

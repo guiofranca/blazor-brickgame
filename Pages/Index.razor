@@ -1,0 +1,23 @@
+﻿@page "/"
+@using Services
+@inject GameEngine GameEngine
+
+<div class="outer-div" @onkeydown="@KeyDown" tabindex="0"> 
+    <button @onclick="Play">Play/Pause</button> (Use A and D keys to move the bar)
+    <blazor.Shared.Game.Board />
+</div>
+
+@code {
+    void Play() {
+        if(GameEngine.IsRunning) GameEngine.PauseGame();
+        else GameEngine.StartGame();
+
+        GameEngine.GameLoop();
+    }
+
+    void KeyDown(KeyboardEventArgs e) {
+        if(e.Key == "d") GameEngine.Bar.MoveRight();
+        if(e.Key == "a") GameEngine.Bar.MoveLeft();
+    }
+}
+

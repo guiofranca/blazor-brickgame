@@ -1,0 +1,15 @@
+@using Services
+@inject GameEngine GameEngine
+@inject Models.Ball gameBall
+
+<div 
+    class="ball"
+    style="@GameEngine.Ball.Style()"
+></div>
+
+@code {
+    protected override void OnInitialized()
+    {
+        GameEngine.PropertyChanged += (o, e) => StateHasChanged();
+    }
+}

@@ -1,0 +1,8 @@
+<div class="brick" style="@brick.BrickStyle()">
+    @* <span style="font-size: 8px; position: absolute;">@brick.Id</span> *@
+</div>
+
+@code {
+    [Parameter]
+    public Models.Brick brick {get; set;} = new Models.Brick(0,0,0);
+}
