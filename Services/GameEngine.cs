@@ -125,13 +125,12 @@ public class GameEngine : INotifyPropertyChanged
             Level++;
             Bricks = GenerateBricks(Level);
         } else {
+            Score = 0;
             Level = 1;
             Bricks = GenerateBricks(Level);
         }
         GameWon = false;
         GameLost = false;
-        if(GameLost) Score = 0;
-        //GameLoop();
         Ball = new Ball(Board, Bar);
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Ball)));
     }
