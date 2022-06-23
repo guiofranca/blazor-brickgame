@@ -17,6 +17,15 @@
     z-index: -100;
     position: relative;
 }
+
+.unselectable[b-pc2l9898w9] {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
 /* /Shared/Game/Brick.razor.rz.scp.css */
 .brick[b-d7sbxffx22] {
     position: absolute;
