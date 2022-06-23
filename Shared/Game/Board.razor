@@ -3,8 +3,16 @@
 @inject Models.Bar bar
 @inject Services.GameEngine GameEngine
 
-<div class="board" style="@BoardSizeStyle()">
-    <span style="position: absolute; left: 15px">Score: @GameEngine.Score</span>
+<div class="board unselectable" 
+    style="@BoardSizeStyle()" 
+    @onmousedown="OnMouseDown" 
+    @onmouseup="OnMouseUp" 
+    @onmousemove="OnMouseMove"
+    @ontouchenter="OnTouchEnter"
+    @ontouchleave="OnTouchLeave"
+    @ontouchmove="OnTouchMove"
+    >
+    <span style="position: absolute; left: 15px;">Score: @GameEngine.Score</span>
     <Ball />
     <Bar />
     @foreach(var brick in GameEngine.Bricks) {
@@ -30,6 +38,37 @@
     protected override void OnInitialized()
     {
         GameEngine.PropertyChanged += (o, e) => StateHasChanged();
+    }
+
+    public void OnMouseDown(MouseEventArgs e) {
+        GameEngine.MouseClicked = true;
+    }
+
+    public void OnMouseUp(MouseEventArgs e) {
+        GameEngine.MouseClicked = false;
+    }
+
+    public void OnMouseMove(MouseEventArgs e) {
+        if(GameEngine.MouseClicked) {
+            GameEngine.Bar.MoveWithMouse(e.ClientX);
+        }
+    }
+
+    public void OnTouchEnter(TouchEventArgs e) {
+        GameEngine.MouseClicked = true;
+        Console.WriteLine("Enter");
+    }
+
+    public void OnTouchLeave(TouchEventArgs e) {
+        GameEngine.MouseClicked = false;
+        Console.WriteLine("Leave");
+    }
+
+    public void OnTouchMove(TouchEventArgs e) {
+        if(GameEngine.MouseClicked) {
+            Console.WriteLine("move");
+            GameEngine.Bar.MoveWithMouse(e.Touches[0].ClientX);
+        }
     }
 
     public void RestartGame() {

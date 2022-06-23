@@ -46,13 +46,11 @@ public class Ball
             if(Point.X >= _bar.Point.X && Point.X < _bar.Point.X + _bar.Width/3) {
                 if(VelocityX >= 0 && VelocityX > MinVelocity) VelocityX--;
                 if(VelocityX <= 0 && VelocityX > -MaxVelocity) VelocityX--;
-                Console.WriteLine("Colide bar <<<");
             }
 
             if(Point.X >= _bar.Point.X + 2*_bar.Width/3 && Point.X < _bar.Point.X + _bar.Width) {
                 if(VelocityX >= 0 && VelocityX < MaxVelocity) VelocityX++;
                 if(VelocityX <= 0 && VelocityX < -MinVelocity) VelocityX++;
-                Console.WriteLine("Colide bar >>>");
             }
 
 

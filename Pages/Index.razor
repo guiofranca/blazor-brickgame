@@ -2,7 +2,7 @@
 @using Services
 @inject GameEngine GameEngine
 
-<div class="outer-div" @onkeydown="@KeyDown" tabindex="0"> 
+<div @onkeydown="@KeyDown" tabindex="0"> 
     <button @onclick="Play">Play/Pause</button> (Use A and D keys to move the bar)
     <blazor.Shared.Game.Board />
 </div>

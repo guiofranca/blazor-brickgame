@@ -24,6 +24,13 @@ public class Bar
         if(Point.X > Board.Width - Width) Point.X = Board.Width - Width;
     }
 
+    public void MoveWithMouse(double position) {
+        var newPosition = position - 24 - Width/2;
+        Point.X = (int) newPosition;
+        if(newPosition > Board.Width - Width) Point.X = Board.Width - Width;
+        if(newPosition < 0) Point.X = 0;
+    }
+
     public string BarStyle() {
         return $@"
         height: {Height}px; 

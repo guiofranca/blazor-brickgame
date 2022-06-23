@@ -13,6 +13,7 @@ public class GameEngine : INotifyPropertyChanged
     public bool GameWon = false;
     public bool GameLost = false;
     public int Level { get; set; } = 1;
+    public bool MouseClicked = false;
     public GameEngine(Ball ball, Bar bar, Board board)
     {
         Ball = ball;
@@ -75,7 +76,6 @@ public class GameEngine : INotifyPropertyChanged
             && Ball.Point.Y + Ball.Height >= b.Point.Y
             && Ball.Point.Y < b.Point.Y + b.Height
             && Ball.VelocityX > 0) {
-                Console.WriteLine($"Hit Brick{b.Id} left. HP: {b.HealthPoints}");
                 hit = true;
             }
         return hit;
@@ -88,7 +88,6 @@ public class GameEngine : INotifyPropertyChanged
             && Ball.Point.Y + Ball.Height >= b.Point.Y
             && Ball.Point.Y + Ball.Height < b.Point.Y + Ball.MaxVelocity
             && Ball.VelocityY > 0) {
-                Console.WriteLine($"Hit Brick{b.Id} top. HP: {b.HealthPoints}");
                 hit = true;
             }
         return hit;
@@ -101,7 +100,6 @@ public class GameEngine : INotifyPropertyChanged
             && Ball.Point.Y <= b.Point.Y + b.Height
             && Ball.Point.Y >= b.Point.Y + b.Height - Ball.MaxVelocity
             && Ball.VelocityY < 0) {
-                Console.WriteLine($"Hit Brick{b.Id} bottom. HP: {b.HealthPoints}");
                 hit = true;
             }
         return hit;
@@ -114,7 +112,6 @@ public class GameEngine : INotifyPropertyChanged
             && Ball.Point.X <= b.Point.X + b.Width
             && Ball.Point.X >= b.Point.X + b.Width - Ball.MaxVelocity
             && Ball.VelocityX < 0) {
-                Console.WriteLine($"Hit Brick{b.Id} Right");
                 hit = true;
             }
         return hit;
@@ -141,7 +138,7 @@ public class GameEngine : INotifyPropertyChanged
         int brickCount = 1;
         int health = 5;
         for(int i = 20; i < 250; i+=43) {
-            health = rows;
+            health = rows > 5 ? 5 : rows;
             for(int j = 20; j <= rows*20; j+=20) {
                 if(health > 0) bricks.Add(new Brick(i,j, brickCount, health));
                 health--;
