@@ -8,8 +8,8 @@
     @onmousedown="OnMouseDown" 
     @onmouseup="OnMouseUp" 
     @onmousemove="OnMouseMove"
-    @ontouchenter="OnTouchEnter"
-    @ontouchleave="OnTouchLeave"
+    @ontouchstart="OnTouchStart"
+    @ontouchend="OnTouchEnd"
     @ontouchmove="OnTouchMove"
     >
     <span style="position: absolute; left: 15px;">Score: @GameEngine.Score</span>
@@ -54,19 +54,16 @@
         }
     }
 
-    public void OnTouchEnter(TouchEventArgs e) {
+    public void OnTouchStart(TouchEventArgs e) {
         GameEngine.MouseClicked = true;
-        Console.WriteLine("Enter");
     }
 
-    public void OnTouchLeave(TouchEventArgs e) {
+    public void OnTouchEnd(TouchEventArgs e) {
         GameEngine.MouseClicked = false;
-        Console.WriteLine("Leave");
     }
 
     public void OnTouchMove(TouchEventArgs e) {
         if(GameEngine.MouseClicked) {
-            Console.WriteLine("move");
             GameEngine.Bar.MoveWithMouse(e.Touches[0].ClientX);
         }
     }
